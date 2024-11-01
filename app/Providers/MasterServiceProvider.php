@@ -20,6 +20,11 @@ class MasterServiceProvider extends ServiceProvider
             'App\Interfaces\Master\EmployeeInterface',
             'App\Repositories\Master\EmployeeRepository'
         );
+
+        $this->app->bind(
+            'App\Interfaces\Master\RoleInterface',
+            'App\Repositories\Master\RoleRepository'
+        );
     }
 
     /**

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string('role');
             $table->string('slug');
-            $table->rememberToken();
+            $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });
