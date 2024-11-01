@@ -38,8 +38,7 @@ class UpdateRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        // $this->merge([
-        // ]);
+        // $this->merge([]);
     }
 
     /**
@@ -49,13 +48,6 @@ class UpdateRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
-            'nik.required' => 'NIK harus diisi.',
-            'nik.string' => 'NIK harus berupa teks.',
-            'nik.unique' => 'NIK sudah terdaftar.',
-            'firstname.required' => 'Nama depan harus diisi.',
-            'lastname.required' => 'Nama belakang harus diisi.',
-            'last_education.required' => 'Pendidikan terakhir harus diisi.',
-        ];
+        return [];
     }
 }
