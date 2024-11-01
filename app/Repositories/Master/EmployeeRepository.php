@@ -24,7 +24,7 @@ class EmployeeRepository implements EmployeeInterface
             $isNotPaginate = $request->query("not-paginate");
 
             if ($keyword) {
-                $collection->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'ILIKE', "%$keyword%");
+                $collection->where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', "%$keyword%");
             }
 
             if ($isNotPaginate) {
