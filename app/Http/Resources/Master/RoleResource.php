@@ -22,7 +22,7 @@ class RoleResource extends JsonResource
             'createdBy' => $this->whenLoaded('createdBy', function () {
                 return [
                     'username' => $this->createdBy->username,
-                    'employeeName' => $this->createdBy->employee->name ?? null
+                    'employeeName' => $this->createdBy->employee->firstname . " " .  $this->createdBy->employee->lastname ?? null
                 ];
             }),
         ];

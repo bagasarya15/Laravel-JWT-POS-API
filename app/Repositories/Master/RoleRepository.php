@@ -19,7 +19,7 @@ class RoleRepository implements RoleInterface
     public function index(Request $request)
     {
         try {
-            $collection = Role::with(['createdBy'])->latest();
+            $collection = Role::with(['createdBy' => ['employee']])->latest();
             $keyword = str($request->query("search"));
             $isNotPaginate = $request->query("not-paginate");
 
