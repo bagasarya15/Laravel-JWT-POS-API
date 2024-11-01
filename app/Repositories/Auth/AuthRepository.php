@@ -43,6 +43,13 @@ class AuthRepository implements AuthInterface
             $credentials = $request->only('username', 'password');
             $user = User::where('username', '=', $request->username)->first();
 
+            if(!$user){
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'User not found'
+                ]);
+            }
+
             if (!$token = JWTAuth::attempt($credentials)) {
                 $this->handleLogLogin($user->id, 'Failed');
                 return response()->json([
