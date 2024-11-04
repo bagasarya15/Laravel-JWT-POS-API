@@ -31,6 +31,8 @@ class UpdateRequest extends FormRequest
                 'string',
                 Rule::unique('users', 'username')->ignore($userId)->whereNull('deleted_at')
             ],
+            'employee_id' => ['required', 'exists:employees,id'],
+            'role_id' => ['required', 'exists:roles,id']
         ];
     }
 

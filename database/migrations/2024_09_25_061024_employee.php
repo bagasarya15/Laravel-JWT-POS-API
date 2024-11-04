@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nik')->nullable();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('last_education')->nullable();
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('set null');

@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'username' => ['required', 'string', Rule::unique('users', 'username')->whereNull('deleted_at')],
-            'employee_id' => ['required', 'exists:employees,id']
+            'employee_id' => ['required', 'exists:employees,id'],
+            'role_id' => ['required', 'exists:roles,id']
         ];
     }
 
