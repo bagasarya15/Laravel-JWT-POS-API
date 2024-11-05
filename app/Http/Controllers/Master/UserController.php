@@ -10,30 +10,34 @@ use App\Http\Requests\User\UpdateRequest;
 
 class UserController extends Controller
 {
-    protected $userInterface;
+    protected $interface;
 
-    public function __construct(UserInterface $userInterface)
+    public function __construct(UserInterface $interface)
     {
-        $this->userInterface = $userInterface;
+        $this->interface = $interface;
     }
 
     public function index(Request $request)
     {
-        return $this->userInterface->index($request);
+        return $this->interface->index($request);
     }
 
     public function store(StoreRequest $request)
     {
-        return $this->userInterface->store($request);
+        return $this->interface->store($request);
     }
 
     public function update(UpdateRequest $request, $id)
     {
-        return $this->userInterface->update($request, $id);
+        return $this->interface->update($request, $id);
     }
 
     public function destroy($id)
     {
-        return $this->userInterface->destroy($id);
+        return $this->interface->destroy($id);
+    }
+
+    public function selectUserForRegistration() {
+        return $this->interface->selectUserForRegistration();
     }
 }

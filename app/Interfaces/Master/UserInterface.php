@@ -15,4 +15,6 @@ interface UserInterface
     public function update(UpdateRequest $request, $id);
 
     public function destroy($id);
+
+    public function selectUserForRegistration();
 }

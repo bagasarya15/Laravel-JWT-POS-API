@@ -8,7 +8,9 @@ use App\Traits\ResponseTrait;
 use App\Http\Requests\User\StoreRequest;
 use App\Interfaces\Master\UserInterface;
 use App\Http\Requests\User\UpdateRequest;
+use App\Http\Resources\Master\EmployeeResource;
 use App\Http\Resources\Master\UserResource;
+use App\Models\Employee;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserRepository implements UserInterface
@@ -40,7 +42,7 @@ class UserRepository implements UserInterface
 
             return $this->wrapResponse(Response::HTTP_OK, 'Data berhasil dimuat', $result);
         } catch (\Throwable $th) {
-            return $th;
+            throw $th;
         }
     }
 
@@ -57,7 +59,7 @@ class UserRepository implements UserInterface
                 return $this->wrapResponse(Response::HTTP_CREATED, 'Data berhasil ditambah', $resource);
             }
         } catch (\Throwable $th) {
-            return $th;
+            throw $th;
         }
     }
 
@@ -75,7 +77,7 @@ class UserRepository implements UserInterface
                 return $this->wrapResponse(Response::HTTP_OK, 'Data berhasil diperbarui', $resource);
             }
         } catch (\Throwable $th) {
-            return $th;
+            throw $th;
         }
     }
 
@@ -90,7 +92,24 @@ class UserRepository implements UserInterface
                 return $this->wrapResponse(Response::HTTP_OK, 'Data berhasil dihapus');
             }
         } catch (\Throwable $th) {
-            return $th;
+            throw $th;
+        }
+    }
+
+    public function selectUserForRegistration(){
+        try {
+            $collection = Employee::whereNotIn('id', function ($query) {
+                $query->select('employee_id')->from('users')->whereNull('deleted_at');
+            })->latest();
+
+            $result = EmployeeResource::collection($collection->get())
+            ->response()
+            ->getData(true);
+
+            return $this->wrapResponse(Response::HTTP_OK, 'Data berhasil dimuat', $result);
+
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 }

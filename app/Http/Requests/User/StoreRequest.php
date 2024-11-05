@@ -26,8 +26,9 @@ class StoreRequest extends FormRequest
     {
         return [
             'username' => ['required', 'string', Rule::unique('users', 'username')->whereNull('deleted_at')],
-            'employee_id' => ['required', 'exists:employees,id'],
-            'role_id' => ['required', 'exists:roles,id']
+            'employee_id' => ['required', 'exists:employees,id', Rule::unique('users', 'employee_id')],
+            'role_id' => ['required', 'exists:roles,id'],
+            'password' => ['nullable']
         ];
     }
 
@@ -36,7 +37,7 @@ class StoreRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        if ($this->password) {
+        if ($this->password == '' || $this->password == null) {
             $this->merge([
                 'password' => Hash::make("password")
             ]);
