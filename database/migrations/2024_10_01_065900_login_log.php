@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('login_logs', function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->primary();
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

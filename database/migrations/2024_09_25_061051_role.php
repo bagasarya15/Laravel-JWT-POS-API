@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string('role');
             $table->string('slug');
-            $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
